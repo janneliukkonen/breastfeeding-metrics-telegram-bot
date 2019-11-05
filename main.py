@@ -27,7 +27,6 @@ from telegram.ext import (CallbackContext, CallbackQueryHandler,
 # Bot token
 if not (API_TOKEN:= os.environ["TG_API_TOKEN"]):
     API_TOKEN="manually inputted"
-logging.critical(API_TOKEN)
 
 PORT = 5005
 URL = "https://tg.janli.dynu.net"
