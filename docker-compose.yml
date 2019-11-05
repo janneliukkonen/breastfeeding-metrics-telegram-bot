@@ -4,6 +4,7 @@ services:
     #Build using local Dockerfile
     environment:
       TZ: Europe/Helsinki
+      TG_API_TOKEN: somethingsecret
     build: .
     #Link to the tg container
     ports:

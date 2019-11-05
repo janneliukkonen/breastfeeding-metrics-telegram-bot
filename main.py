@@ -11,6 +11,7 @@ database.
 import datetime
 import logging
 import math
+import os
 from uuid import uuid4
 from typing import List, Tuple
 
@@ -21,7 +22,13 @@ from influxdb import InfluxDBClient
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import (CallbackContext, CallbackQueryHandler,
                           CommandHandler, Filters, PicklePersistence, Updater)
-TOKEN = "851577171:AAG0xARGNCVOTatiiwTRHC2IxahwZHFsOZk"
+
+
+# Bot token
+if not (API_TOKEN:= os.environ["TG_API_TOKEN"]):
+    API_TOKEN="manually inputted"
+logging.critical(API_TOKEN)
+
 PORT = 5005
 URL = "https://tg.janli.dynu.net"
 PERSISTENCE_FILE = PicklePersistence(filename='imetysbotpersistence')
@@ -523,7 +530,7 @@ def main():
      Make sure to set use_context=True to use the new context based callbacks
      Post version 12 this will no longer be necessary
     """
-    updater = Updater(TOKEN, use_context=True, persistence=PERSISTENCE_FILE)
+    updater = Updater(API_TOKEN, use_context=True, persistence=PERSISTENCE_FILE)
 
     #  updater.dispatcher.add_handler(
     #  MessageHandler(Filters.chat(-1234), askfeeling))
@@ -584,8 +591,8 @@ def main():
     # Run the bot until the user presses Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT
 
-    updater.start_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN)
-    updater.bot.set_webhook(URL + "/" + TOKEN)
+    updater.start_webhook(listen="0.0.0.0", port=PORT, url_path=API_TOKEN)
+    updater.bot.set_webhook(URL + "/" + API_TOKEN)
     updater.idle()
 
 
