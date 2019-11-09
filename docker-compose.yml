@@ -1,12 +1,12 @@
 version: "3"
 services:
   breastfeedtgbot:
-    #Build using local Dockerfile
+    # Build using local Dockerfile
     environment:
       TZ: Europe/Helsinki
+      # Bot token from Tg's BotFather 
       TG_API_TOKEN: somethingsecret
     build: .
-    #Link to the tg container
     ports:
       - "5005:5005"
     restart: "unless-stopped"
